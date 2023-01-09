@@ -2,6 +2,7 @@ package shoppingCart;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Arrays;
 
 public class FileHandling {
     private String path;
@@ -58,39 +59,23 @@ public class FileHandling {
 
     public void add(String items) throws IOException {
         this.readerWriter = new ReaderWriter(this.path);
+        readerWriter.readFile(nameChosen);
+        FileWriter writer = ReaderWriter.bufferedWriter(nameChosen);
         String line;
-
+        String itemsAddedString = "";
         while (null != (line = readerWriter.bufferedFile())) {
-            String itemsAdded = "";
-            if (line.contains(nameChosen)) {
-                String[] itemArr = items.split(" ");
-                this.fileWriter = new FileWriter(Constants.SHOPPINGCART, true);
-                for (int i = 0; i < itemArr.length; i++) {
-                    if (line.contains(itemArr[i])) {
-                        continue;
-                    }
-                    fileWriter.append(String.format(" %s", itemArr[i]));
-                    if (i != itemArr.length - 1) {
-                        itemsAdded += itemArr[i] + ", ";
-                    } else {
-                        itemsAdded += itemArr[i];
-                    }
-                }
-                if (itemsAdded.equalsIgnoreCase("")) {
-                    System.out.println("Nothing new added to cart.");
-                } else {
-                    System.out.printf("%s added to the cart.\n", itemsAdded);
+            String[] itemsAddedArray = items.trim().split(" ");
+            for (int i = 0; i < itemsAddedArray.length; i++) {
+                if (!line.contains(itemsAddedArray[i])) {
+                    itemsAddedString += String.format(" %s", itemsAddedArray[i]);
                 }
             }
-
         }
-
+        writer.write(itemsAddedString);
+        writer.flush();
+        writer.close();
         readerWriter.closeBuffer();
         readerWriter.closeReader();
-
-        // CLOSE WRITER
-        fileWriter.flush();
-        fileWriter.close();
     }
 
     public void delete(int index) throws IOException {
@@ -123,3 +108,25 @@ public class FileHandling {
     }
 
 }
+
+// String itemsAdded = "";
+// if (line.contains(nameChosen)) {
+// String[] itemArr = items.split(" ");
+// this.fileWriter = new FileWriter(Constants.SHOPPINGCART, true);
+// for (int i = 0; i < itemArr.length; i++) {
+// if (line.contains(itemArr[i])) {
+// continue;
+// }
+// fileWriter.append(String.format(" %s", itemArr[i]));
+// if (i != itemArr.length - 1) {
+// itemsAdded += itemArr[i] + ", ";
+// } else {
+// itemsAdded += itemArr[i];
+// }
+// }
+// if (itemsAdded.equalsIgnoreCase("")) {
+// System.out.println("Nothing new added to cart.");
+// } else {
+// System.out.printf("%s added to the cart.\n", itemsAdded);
+// }
+// }

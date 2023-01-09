@@ -48,8 +48,12 @@ public class ReaderWriter {
         return this.bufferReader.readLine();
     }
 
-    public FileWriter bufferedWriter(String path) throws IOException {
-        return this.writer = new FileWriter(path);
+    public static FileWriter bufferedWriter(String name) throws IOException {
+        return new FileWriter(
+                Paths.get(Constants.SHOPPINGCART +
+                        String.format("%s.cart", name))
+                        .toFile(),
+                true);
     }
 
     public void closeBuffer() throws IOException {
