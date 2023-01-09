@@ -7,5 +7,5 @@ public class Constants {
     public static final String LOAD = "load";
     public static final String SAVE = "save";
     public static final String EXIT = "exit";
-    public static final String SHOPPINGCART = "shoppingcart/shoppingcart.jar";
+    public static final String SHOPPINGCART = "shoppingcart/";
 }

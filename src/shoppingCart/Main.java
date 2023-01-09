@@ -22,21 +22,20 @@ public class Main {
                     name = scan.nextLine().trim();
                     handler.load(name);
                 }
+                if (command.equalsIgnoreCase(Constants.LIST)) {
+                    handler.list();
+                }
                 if (command.equalsIgnoreCase(Constants.EXIT)) {
                     handler.exit();
                 }
-                if (command.equalsIgnoreCase(Constants.LIST)) {
-                    handler.list();
 
-                }
                 if (command.equalsIgnoreCase(Constants.DELETE)) {
                     index = scan.nextInt();
-                    // handler.delete(index);
+                    handler.delete(index);
                 }
                 if (command.equalsIgnoreCase(Constants.ADD)) {
                     item = scan.nextLine();
                     handler.add(item);
-                    // handler.delete(index);
                 }
 
             }

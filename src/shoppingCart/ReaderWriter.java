@@ -10,15 +10,36 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class ReaderWriter {
-    private Path path;
-    private File file;
     private FileReader reader;
     BufferedReader bufferReader;
     FileWriter writer;
+    Path path;
 
     public ReaderWriter(String path) throws FileNotFoundException {
         this.path = Paths.get(path);
-        this.file = this.path.toFile();
+    }
+
+    public int getNumberOfCarts(String path) {
+        return new File(path).listFiles().length;
+
+    }
+
+    public boolean checkExistence(String name) throws IOException {
+        File fileChecker = new File(String.format("%s/%s.cart",
+                Constants.SHOPPINGCART, name));
+        fileChecker.createNewFile();
+        if (fileChecker.exists()) {
+            return true;
+        }
+        return false;
+    }
+
+    public void createFile(String fileName) throws IOException {
+        FileWriter writer = new FileWriter(String.format("./shoppingcart/%s", fileName));
+    }
+
+    public void readFile(String name) throws FileNotFoundException {
+        File file = Paths.get(Constants.SHOPPINGCART + String.format("/%s.cart", name)).toFile();
         this.reader = new FileReader(file);
         this.bufferReader = new BufferedReader(reader);
     }
