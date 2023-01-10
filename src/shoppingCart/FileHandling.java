@@ -92,43 +92,23 @@ public class FileHandling {
                 System.out.println("Incorrect item index.");
             }
             if (i == index) {
-                System.out.printf("Removing %s from cart.\n", userItemsArr[i]);
+                System.out.printf("Removed %s from cart.\n", userItemsArr[i]);
                 itemRemoved = userItemsArr[i];
                 userItemsString += "";
                 continue;
             }
             userItemsString += userItemsArr[i] + " ";
-            System.out.println(userItemsArr[i]);
         }
         this.userItems.replace(0, (userItemsString.length() + itemRemoved.length()), userItemsString);
         this.madeChanges = true;
     }
 
+    public void save() throws IOException {
+        fileWriter = readerWriter.fileWriter(nameChosen);
+        fileWriter.write(userItems.toString());
+        fileWriter.flush();
+        fileWriter.close();
+        System.out.println("Cart saved successfully.");
+    }
+
 }
-
-// }
-// writer.write(itemsAddedString);
-// writer.flush();
-// writer.close();
-
-// String itemsAdded = "";
-// if (line.contains(nameChosen)) {
-// String[] itemArr = items.split(" ");
-// this.fileWriter = new FileWriter(Constants.SHOPPINGCART, true);
-// for (int i = 0; i < itemArr.length; i++) {
-// if (line.contains(itemArr[i])) {
-// continue;
-// }
-// fileWriter.append(String.format(" %s", itemArr[i]));
-// if (i != itemArr.length - 1) {
-// itemsAdded += itemArr[i] + ", ";
-// } else {
-// itemsAdded += itemArr[i];
-// }
-// }
-// if (itemsAdded.equalsIgnoreCase("")) {
-// System.out.println("Nothing new added to cart.");
-// } else {
-// System.out.printf("%s added to the cart.\n", itemsAdded);
-// }
-// }

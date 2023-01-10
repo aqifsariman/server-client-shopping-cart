@@ -48,12 +48,11 @@ public class ReaderWriter {
         return this.bufferReader.readLine();
     }
 
-    public static FileWriter bufferedWriter(String name) throws IOException {
+    public FileWriter fileWriter(String name) throws IOException {
         return new FileWriter(
-                Paths.get(Constants.SHOPPINGCART +
-                        String.format("%s.cart", name))
-                        .toFile(),
-                true);
+                Constants.SHOPPINGCART +
+                        String.format("%s.cart", name),
+                false);
     }
 
     public void closeBuffer() throws IOException {
@@ -65,11 +64,3 @@ public class ReaderWriter {
     }
 
 }
-
-// // FETCH FILE FROM PATH
-// Path cartPath = Paths.get(path);
-// File cartFile = cartPath.toFile();
-
-// // READ FILE USING FILEREADER AND BUFFEREDREADER
-// FileReader reader = new FileReader(cartFile);
-// BufferedReader buffer = new BufferedReader(reader);

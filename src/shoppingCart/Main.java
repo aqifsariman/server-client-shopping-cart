@@ -37,6 +37,9 @@ public class Main {
                     item = scan.nextLine();
                     handler.add(item);
                 }
+                if (command.equalsIgnoreCase(Constants.SAVE)) {
+                    handler.save();
+                }
 
             }
         } catch (NumberFormatException e) {
