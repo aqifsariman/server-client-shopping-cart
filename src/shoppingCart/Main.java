@@ -31,7 +31,7 @@ public class Main {
 
                 if (command.equalsIgnoreCase(Constants.DELETE)) {
                     index = scan.nextInt();
-                    handler.delete(index);
+                    handler.delete(index - 1);
                 }
                 if (command.equalsIgnoreCase(Constants.ADD)) {
                     item = scan.nextLine();
