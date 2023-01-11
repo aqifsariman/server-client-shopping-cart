@@ -11,15 +11,20 @@ public class FileHandling {
     private FileWriter fileWriter;
     private StringBuilder userItems = new StringBuilder();
     private boolean madeChanges = false;
+    private String host;
+    private int port;
+    private String name;
 
-    public FileHandling(String path) {
+    public FileHandling(String path, String name, String host, int port) {
         this.path = path;
+        this.name = name;
+        this.host = host;
+        this.port = port;
     }
 
     public void run() throws IOException {
+        Client client = new Client(host, name, port);
         this.readerWriter = new ReaderWriter(this.path);
-        cartsCount = readerWriter.getNumberOfCarts(this.path);
-        System.out.printf("There are %d carts in the shopping directory.\n", cartsCount);
     }
 
     public void exit() {
@@ -27,7 +32,7 @@ public class FileHandling {
         System.exit(1);
     }
 
-    public void load(String name) throws IOException {
+    public void load(String name, String host, int port) throws IOException {
         this.readerWriter = new ReaderWriter(this.path);
         this.nameChosen = name;
         if (readerWriter.checkExistence(name)) {
