@@ -27,7 +27,6 @@ public class ReaderWriter {
     public boolean checkExistence(String name) throws IOException {
         File fileChecker = new File(String.format("%s/%s.cart",
                 Constants.SHOPPINGCART, name));
-        fileChecker.createNewFile();
         if (fileChecker.exists()) {
             return true;
         }
